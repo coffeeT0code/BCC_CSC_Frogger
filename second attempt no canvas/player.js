@@ -6,7 +6,9 @@ class Player {
         this.width = 9;
         this.shouldMove = true; 
         
-
+        document.addEventListener('keyup', (e) => {
+            this.movePlayer(e);
+        });
     }
 
     movePlayer(e) {
@@ -15,7 +17,7 @@ class Player {
             this.squares[this.currentIndex].classList.remove('player')
             switch (e.code) {
                 case 'ArrowLeft':
-                    console.log('move left');
+                  
                     // checking for the left border
                     if (this.currentIndex % this.width !== 0) {
                         this.currentIndex -= 1;
@@ -23,7 +25,7 @@ class Player {
                     break;
 
                 case 'ArrowRight':
-                    console.log('move right');
+                    
                     // checking for the right border
                     if (this.currentIndex % this.width < this.width - 1) {
                         this.currentIndex += 1;
@@ -31,7 +33,7 @@ class Player {
                     break;
 
                 case 'ArrowUp':
-                    console.log('move up');
+                    
                     // checking for the top border
                     if (this.currentIndex - this.width >= 0) {
                         this.currentIndex -= this.width;
@@ -40,7 +42,7 @@ class Player {
                     break;
 
                 case 'ArrowDown':
-                    console.log('move down');
+                
                     if (this.currentIndex + this.width < this.width * this.width) {
                         this.currentIndex += this.width;
                     }

@@ -13,6 +13,7 @@ let timerID;
 let playerTimerId;
 let currentTime = 20;
 let currentIndex = 76;
+let enableRestart = true; 
 
 let player = new Player(currentIndex);
 let log = new Log();
@@ -25,6 +26,7 @@ function autoMove() {
     log.logsRight.forEach(logRight => log.moveLogRight(logRight))
     car.carsLeft.forEach(carLeft => car.moveCarLeft(carLeft))
     car.carsRight.forEach(carRight => car.moveCarRight(carRight))
+    console.log(player.currentIndex)
 }
 
 function game() {
@@ -75,16 +77,20 @@ reStartBtn.addEventListener('click', () => {
         
         timerID = setInterval(autoMove, 1000);
         playerTimerId = setInterval(game, 50);
-
+        enableRestart = true; 
+        reStartBtn.innerText = 'restart';
 
     } else {
+        enableRestart = false;
+        document.removeEventListener('keyup', (e) => {
+            player.movePlayer(e);
+        });
+        clearInterval(timerID);
+        clearInterval(playerTimerId);
         currentTime = 20;
         timerID = setInterval(autoMove, 1000);
         playerTimerId = setInterval(game, 50);
         player.shouldMove = true;
-        document.addEventListener('keyup', (e) => {
-            player.movePlayer(e);
-        });
-
+        reStartBtn.innerText = 'Restart the game';
     }
 });
