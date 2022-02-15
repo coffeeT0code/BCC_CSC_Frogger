@@ -9,7 +9,6 @@ class Player {
 
     }
 
-
     movePlayer(e) {
         if (this.shouldMove) {
 
@@ -45,7 +44,6 @@ class Player {
                     if (this.currentIndex + this.width < this.width * this.width) {
                         this.currentIndex += this.width;
                     }
-
                     break;
             }
             this.squares[this.currentIndex].classList.add('player')
