@@ -7,6 +7,9 @@ let logsLeft = document.querySelectorAll('.log-left');
 let logsRight = document.querySelectorAll('.log-right');
 let carsLeft = document.querySelectorAll('.car-left');
 let carsRight = document.querySelectorAll('.car-right');
+let timerID;
+let playerTimerId; 
+let currentTime = 20;
 
 let currentIndex = 76;
 
@@ -53,15 +56,21 @@ function moveFrog(e) {
     squares[currentIndex].classList.add('frog')
 }
 
-document.addEventListener('keyup', moveFrog);
 
 function autoMove() {
+    currentTime--;
+    displayRemainingTime.textContent = currentTime;
     logsLeft.forEach(logLeft => moveLogleft(logLeft))
     logsRight.forEach(logRight => movelogRight(logRight))
     carsLeft.forEach(carLeft => moveCarLeft(carLeft))
     carsRight.forEach(carRight => moveCarRight(carRight))
-    }
+  
+}
 
+function checkCollision() {
+    loose();
+    win();
+}
 
 function moveLogleft(logLeft) {
     switch (true) {
@@ -144,9 +153,43 @@ function moveCarRight(carRight) {
             carRight.classList.remove('c3');
             carRight.classList.add('c2');
             break;
- 
     }
 }
 
+function loose() {
+    if (squares[currentIndex].classList.contains('c1') ||
+        squares[currentIndex].classList.contains('l4') ||
+        squares[currentIndex].classList.contains('l5') ||
+        currentTime <= 0) {
+        displayResult.textContent = 'You loose!';
+        clearInterval(timerID);
+        clearInterval(playerTimerId)
+        timerID = null;
+        squares[currentIndex].classList.remove('frog');
+        document.removeEventListener('keyup', moveFrog);
+    }
+}
 
-setInterval(autoMove, 1000)
+function win() {
+    if (squares[currentIndex].classList.contains('lastBlock')) {
+        displayResult.textContent = 'You win!';
+        clearInterval(timerID);
+        clearInterval(playerTimerId);
+        timerID = null; 
+        document.removeEventListener('keyup', moveFrog);
+
+    }
+}
+
+startBtn.addEventListener('click', () => {
+    if (timerID) {
+        clearInterval(timerID);
+        clearInterval(playerTimerId); 
+        timerID = null; 
+        document.removeEventListener('keyup', moveFrog);
+    } else {
+        timerID = setInterval(autoMove, 1000);
+        playerTimerId = setInterval(checkCollision, 50); 
+        document.addEventListener('keyup', moveFrog);
+    }
+});
