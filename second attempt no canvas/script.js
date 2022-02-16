@@ -13,25 +13,44 @@ let timerID;
 let playerTimerId;
 let currentTime = 20;
 let currentIndex = 76;
-let enableRestart = true; 
+let enableRestart = true;
 
 let player = new Player(currentIndex);
 let log = new Log();
 let car = new Car();
 
-function autoMove() {
+function game() {
+    loose();
+    win();
+}
+
+function autoMoveObjects() {
     currentTime--;
     displayRemainingTime.textContent = currentTime;
     log.logsLeft.forEach(logLeft => log.moveLogLeft(logLeft))
     log.logsRight.forEach(logRight => log.moveLogRight(logRight))
     car.carsLeft.forEach(carLeft => car.moveCarLeft(carLeft))
     car.carsRight.forEach(carRight => car.moveCarRight(carRight))
-    console.log(player.currentIndex)
+    movePlayerOnLogs();
 }
 
-function game() {
-    loose();
-    win();
+function movePlayerOnLogs() {
+
+    player.squares[player.currentIndex].classList.remove('player')
+
+    switch (true) {
+        case squares[player.currentIndex].classList.contains('log-left', 'l1'):
+        case squares[player.currentIndex].classList.contains('log-left', 'l2'):
+        case squares[player.currentIndex].classList.contains('log-left', 'l3'):
+            if (player.currentIndex % player.width !== 0 ) player.currentIndex--;
+            break;
+        case squares[player.currentIndex].classList.contains('log-right', 'l1'):
+        case squares[player.currentIndex].classList.contains('log-right', 'l2'):
+        case squares[player.currentIndex].classList.contains('log-right', 'l3'):
+            if (player.currentIndex % player.width < player.width -1 ) player.currentIndex++;
+            break;
+    }
+    player.squares[player.currentIndex].classList.add('player');
 }
 
 function loose() {
@@ -66,7 +85,6 @@ reStartBtn.addEventListener('click', () => {
         }
         currentTime = 20;
         player.currentIndex = 76;
-        console.log('restart')
         clearInterval(timerID);
         clearInterval(playerTimerId);
         document.removeEventListener('keyup', (e) => {
@@ -74,11 +92,12 @@ reStartBtn.addEventListener('click', () => {
         });
         player.shouldMove = true;
         squares[player.currentIndex].classList.add('player');
-        
-        timerID = setInterval(autoMove, 1000);
+
+        timerID = setInterval(autoMoveObjects, 1000);
+
         playerTimerId = setInterval(game, 50);
-        enableRestart = true; 
-        reStartBtn.innerText = 'restart';
+        enableRestart = true;
+        reStartBtn.innerText = 'Restart the game';
 
     } else {
         enableRestart = false;
@@ -88,7 +107,7 @@ reStartBtn.addEventListener('click', () => {
         clearInterval(timerID);
         clearInterval(playerTimerId);
         currentTime = 20;
-        timerID = setInterval(autoMove, 1000);
+        timerID = setInterval(autoMoveObjects, 1000);
         playerTimerId = setInterval(game, 50);
         player.shouldMove = true;
         reStartBtn.innerText = 'Restart the game';

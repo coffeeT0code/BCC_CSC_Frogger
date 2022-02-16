@@ -11,6 +11,7 @@ class Player {
         });
     }
 
+
     movePlayer(e) {
         if (this.shouldMove) {
 

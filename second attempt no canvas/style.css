@@ -8,13 +8,21 @@ body {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid black; 
-    height: 180px;
-    width: 180px;
+    height: 540px;
+    width: 540px;
 }
 
+
+
 .grid div {
-    height: 20px;
-    width: 20px;
+    height: 60px;
+    width: 60px;
+   
+}
+
+
+.default {
+    background-image: url('./assets/grass.png');
 }
 
 .lastBlock {
@@ -22,36 +30,37 @@ body {
 }
 
 .startBlock {
-    background-color: blue;
+    background-image: url('./assets/start.png');
 }
 
-/* .log-left,
-.log-right {
-    background-color: lightblue;
-} */
+.l1 {
+    background-image: url('./assets/log1.png');
+}
 
-/* .car-left,
-.car-right {
-    background-color: lightgray;
-} */
+.l2 {
+    background-image: url('./assets/log2.png');
+}
 
-
-
-.l1, .l2, .l3 {
-    background-color: brown;
+.l3 {
+    background-image: url('./assets/log3.png');
 }
 
 .l4, .l5 {
-    background-color: lightblue;
+    background-image: url('./assets/river.png');
 }
 
-.c1 {
-    background-color: darkorange;
+.car-right.c1 {
+    background-image: url('./assets/car_right.png');
 }
+.car-left.c1 {
+    background-image: url('./assets/car_left.png');
+}
+
 .c2, .c3 {
-    background-color: lightgray;
+    background-image: url('./assets/road.png');
 }
 
 .player {
-    background-color: green;
+    background-image: url('./assets/log1.png');
+    z-index: 10;
 }

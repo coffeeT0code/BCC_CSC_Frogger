@@ -5,6 +5,7 @@ class Log {
     }
 
     moveLogLeft(logLeft) {
+        
         switch (true) {
             case logLeft.classList.contains('l1'):
                 logLeft.classList.remove('l1');
