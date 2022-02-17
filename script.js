@@ -2,91 +2,16 @@
 import Player from "./player.js";
 import Log from "./log.js";
 import Car from "./car.js";
+import Level1 from "./levels/level1.js"
 
 // DOM manipulaton
 let squares;
-let level = [
-    "default", "default", "default", "default", "lastBlock",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "log-left l1",
-    "log-left l2",
-    "log-left l3",
-    "log-left l4",
-    "log-left l5",
-    "log-left l1",
-    "log-left l2",
-    "log-left l3",
-    "log-left l4",
-    "log-right l5",
-    "log-right l1",
-    "log-right l2",
-    "log-right l3",
-    "log-right l4",
-    "log-right l5",
-    "log-right l1",
-    "log-right l2",
-    "log-right l3",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "car-left c1",
-    "car-left c2",
-    "car-left c3",
-    "car-left c1",
-    "car-left c2",
-    "car-left c3",
-    "car-left c1",
-    "car-left c2",
-    "car-left c3",
-    "car-right c1",
-    "car-right c2",
-    "car-right c3",
-    "car-right c1",
-    "car-right c2",
-    "car-right c3",
-    "car-right c1",
-    "car-right c2",
-    "car-right c3",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "default",
-    "startBlock player",
-    "default",
-    "default",
-    "default",
-    "default"
-];
+
 let displayRemainingTime = document.getElementById('time-left');
 let displayResult = document.getElementById('result');
 let reStartBtn = document.getElementById('start-button');
+let pauseBtn = document.getElementById('pause-button');
+
 
 let timerID;
 let playerTimerId;
@@ -94,15 +19,16 @@ let currentTime = 20;
 let currentIndex = 76;
 let enableRestart = true;
 
-
 let player;
 let log;
 let car;
 
+let level1 = new Level1();
+
 let resetLevel = () => {
     let grid = document.getElementById('grid');
-    grid.innerHTML='';
-    level.forEach(e => {
+    grid.innerHTML = '';
+    level1.level.forEach(e => {
         let tile = document.createElement('div');
         tile.className = e;
         grid.append(tile);
@@ -181,6 +107,7 @@ function win() {
 
 reStartBtn.addEventListener('click', () => {
     resetLevel();
+    pauseBtn.innerText = 'pause';
     if (player.currentIndex !== 76) {
         if (squares[player.currentIndex].classList.contains('player')) {
             squares[player.currentIndex].classList.remove('player');
@@ -208,6 +135,7 @@ reStartBtn.addEventListener('click', () => {
 
     } else {
         enableRestart = false;
+        pauseBtn.innerText = 'pause';
         document.removeEventListener('keyup', (e) => {
             player.movePlayer(e);
         });
@@ -220,3 +148,20 @@ reStartBtn.addEventListener('click', () => {
         reStartBtn.innerText = 'Restart the game';
     }
 });
+
+
+pauseBtn.addEventListener('click', (e) => {
+    clearInterval(timerID);
+    clearInterval(playerTimerId);
+    document.removeEventListener('keyup', player.movePlayer(e));
+    pauseBtn.innerText = 'play';
+    player.shouldMove = false;
+
+    if (pauseBtn.innerText === 'play') {
+        pauseBtn.addEventListener('click', (e) => {
+            timerID = setInterval(autoMoveObjects, 1000);
+            playerTimerId = setInterval(game, 50);
+            player.shouldMove = true;
+        })
+    }
+})

@@ -1,27 +1,65 @@
 body {
-    background-color: rgb(1, 0, 32);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black; 
+    height: 540px;
+    width: 540px;
 }
 
-#wrapper {  
-    top: 50%; 
-    left: 50%;
-    position: absolute;
-    background-color: rgb(1, 4, 22);
-    width: 600px;
-    height: 800px;
-    transform: translate(-50%, -50%)
 
+
+.grid div {
+    height: 60px;
+    width: 60px;
+   
 }
 
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
- 
 
-    
+.default {
+    background-image: url('./assets/grass.png');
 }
 
-#canvas3 {
-    background-color: white;
+.lastBlock {
+    background-color: red;
+}
+
+.startBlock {
+    background-image: url('./assets/start.png');
+}
+
+.l1 {
+    background-image: url('./assets/log1.png');
+}
+
+.l2 {
+    background-image: url('./assets/log2.png');
+}
+
+.l3 {
+    background-image: url('./assets/log3.png');
+}
+
+.l4, .l5 {
+    background-image: url('./assets/river.png');
+}
+
+.car-right.c1 {
+    background-image: url('./assets/car_right.png');
+}
+.car-left.c1 {
+    background-image: url('./assets/car_left.png');
+}
+
+.c2, .c3 {
+    background-image: url('./assets/road.png');
+}
+
+.player {
+    background: url('./assets/duck.png'), url('./assets/start.png');
 }
