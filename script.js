@@ -162,6 +162,7 @@ pauseBtn.addEventListener('click', (e) => {
             timerID = setInterval(autoMoveObjects, 1000);
             playerTimerId = setInterval(game, 50);
             player.shouldMove = true;
+            pauseBtn.innerText = 'pause';
         })
     }
 })
