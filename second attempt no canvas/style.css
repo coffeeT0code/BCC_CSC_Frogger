@@ -61,6 +61,5 @@ body {
 }
 
 .player {
-    background-image: url('./assets/log1.png');
-    z-index: 10;
+    background: url('./assets/duck.png'), url('./assets/start.png');
 }

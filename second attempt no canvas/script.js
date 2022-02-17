@@ -25,6 +25,7 @@ function game() {
 }
 
 function autoMoveObjects() {
+    player.changeBackround('removeLog');
     currentTime--;
     displayRemainingTime.textContent = currentTime;
     log.logsLeft.forEach(logLeft => log.moveLogLeft(logLeft))
@@ -32,25 +33,29 @@ function autoMoveObjects() {
     car.carsLeft.forEach(carLeft => car.moveCarLeft(carLeft))
     car.carsRight.forEach(carRight => car.moveCarRight(carRight))
     movePlayerOnLogs();
+
+    
 }
 
 function movePlayerOnLogs() {
 
+    player.changeBackround('remove'); 
     player.squares[player.currentIndex].classList.remove('player')
 
     switch (true) {
         case squares[player.currentIndex].classList.contains('log-left', 'l1'):
         case squares[player.currentIndex].classList.contains('log-left', 'l2'):
         case squares[player.currentIndex].classList.contains('log-left', 'l3'):
-            if (player.currentIndex % player.width !== 0 ) player.currentIndex--;
+            if (player.currentIndex % player.width !== 0) player.currentIndex--;
             break;
         case squares[player.currentIndex].classList.contains('log-right', 'l1'):
         case squares[player.currentIndex].classList.contains('log-right', 'l2'):
         case squares[player.currentIndex].classList.contains('log-right', 'l3'):
-            if (player.currentIndex % player.width < player.width -1 ) player.currentIndex++;
+            if (player.currentIndex % player.width < player.width - 1) player.currentIndex++;
             break;
     }
     player.squares[player.currentIndex].classList.add('player');
+    player.changeBackround('add'); 
 }
 
 function loose() {
@@ -82,7 +87,10 @@ reStartBtn.addEventListener('click', () => {
     if (player.currentIndex !== 76) {
         if (squares[player.currentIndex].classList.contains('player')) {
             squares[player.currentIndex].classList.remove('player');
-        }
+        } 
+
+
+
         currentTime = 20;
         player.currentIndex = 76;
         clearInterval(timerID);
@@ -92,9 +100,9 @@ reStartBtn.addEventListener('click', () => {
         });
         player.shouldMove = true;
         squares[player.currentIndex].classList.add('player');
+        player.changeBackround('add');
 
         timerID = setInterval(autoMoveObjects, 1000);
-
         playerTimerId = setInterval(game, 50);
         enableRestart = true;
         reStartBtn.innerText = 'Restart the game';
