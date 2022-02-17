@@ -4,7 +4,86 @@ import Log from "./log.js";
 import Car from "./car.js";
 
 // DOM manipulaton
-let squares = document.querySelectorAll('.grid div');
+let squares;
+let level = [
+    "default", "default", "default", "default", "lastBlock",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "log-left l1",
+    "log-left l2",
+    "log-left l3",
+    "log-left l4",
+    "log-left l5",
+    "log-left l1",
+    "log-left l2",
+    "log-left l3",
+    "log-left l4",
+    "log-right l5",
+    "log-right l1",
+    "log-right l2",
+    "log-right l3",
+    "log-right l4",
+    "log-right l5",
+    "log-right l1",
+    "log-right l2",
+    "log-right l3",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "car-left c1",
+    "car-left c2",
+    "car-left c3",
+    "car-left c1",
+    "car-left c2",
+    "car-left c3",
+    "car-left c1",
+    "car-left c2",
+    "car-left c3",
+    "car-right c1",
+    "car-right c2",
+    "car-right c3",
+    "car-right c1",
+    "car-right c2",
+    "car-right c3",
+    "car-right c1",
+    "car-right c2",
+    "car-right c3",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "startBlock player",
+    "default",
+    "default",
+    "default",
+    "default"
+];
 let displayRemainingTime = document.getElementById('time-left');
 let displayResult = document.getElementById('result');
 let reStartBtn = document.getElementById('start-button');
@@ -15,9 +94,26 @@ let currentTime = 20;
 let currentIndex = 76;
 let enableRestart = true;
 
-let player = new Player(currentIndex);
-let log = new Log();
-let car = new Car();
+
+let player;
+let log;
+let car;
+
+let resetLevel = () => {
+    let grid = document.getElementById('grid');
+    grid.innerHTML='';
+    level.forEach(e => {
+        let tile = document.createElement('div');
+        tile.className = e;
+        grid.append(tile);
+    });
+    squares = document.querySelectorAll('#grid div');
+
+    player = new Player(currentIndex);
+    log = new Log();
+    car = new Car();
+};
+
 
 function game() {
     loose();
@@ -25,7 +121,7 @@ function game() {
 }
 
 function autoMoveObjects() {
-    player.changeBackround('removeLog');
+    player.changeBackround('remove')
     currentTime--;
     displayRemainingTime.textContent = currentTime;
     log.logsLeft.forEach(logLeft => log.moveLogLeft(logLeft))
@@ -33,13 +129,13 @@ function autoMoveObjects() {
     car.carsLeft.forEach(carLeft => car.moveCarLeft(carLeft))
     car.carsRight.forEach(carRight => car.moveCarRight(carRight))
     movePlayerOnLogs();
+    player.changeBackround('add')
 
-    
 }
 
 function movePlayerOnLogs() {
 
-    player.changeBackround('remove'); 
+    player.changeBackround('remove');
     player.squares[player.currentIndex].classList.remove('player')
 
     switch (true) {
@@ -55,7 +151,7 @@ function movePlayerOnLogs() {
             break;
     }
     player.squares[player.currentIndex].classList.add('player');
-    player.changeBackround('add'); 
+    player.changeBackround('add');
 }
 
 function loose() {
@@ -84,12 +180,15 @@ function win() {
 }
 
 reStartBtn.addEventListener('click', () => {
+    resetLevel();
     if (player.currentIndex !== 76) {
         if (squares[player.currentIndex].classList.contains('player')) {
             squares[player.currentIndex].classList.remove('player');
-        } 
+        }
 
-
+        if (squares[car].classList.contains('c1')) {
+            document.querySelector('.car-left').style.background = `url('./assets/car_left.png')`
+        }
 
         currentTime = 20;
         player.currentIndex = 76;

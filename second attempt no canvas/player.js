@@ -1,7 +1,7 @@
 class Player {
     constructor(currentIndex) {
 
-        this.squares = document.querySelectorAll('.grid div');
+        this.squares = document.querySelectorAll('#grid div');
         this.player =  document.querySelector('.player');
         this.currentIndex = currentIndex;
         this.width = 9;
@@ -73,20 +73,24 @@ class Player {
 
     changeBackround(operation) {
         let urlduck;
+        let urlLog1;
+        let urlLog2; 
+        let urlLog3; 
+
         this.player =  document.querySelector('.player');
         if (operation === 'add') {
             urlduck =  `url('./assets/duck.png') , `;
+            urlLog1 = `url('./assets/log1.png')`;
+            urlLog2 = `url('./assets/log2.png')`;
+            urlLog3 = `url('./assets/log3.png')`;
+
         } else {
             urlduck =  ``;
+            urlLog1 = ``; 
+            urlLog2 = ``; 
+            urlLog3 = ``;  
         }
 
-        let urlriver; 
-        if (operation === 'removeLog') {
-            urlriver = `url('./assets/river.png)`
-        } else {
-            urlriver = ``;
-        }
-        
 
         switch (true) {
             case this.squares[this.currentIndex].classList.contains('startBlock', 'player'):
@@ -102,13 +106,13 @@ class Player {
                 this.player.style.background = `${urlduck}url('./assets/road.png')`;
                 break;
             case this.squares[this.currentIndex].classList.contains('l1', 'player'):
-                this.player.style.background = `${urlduck}url('./assets/log1.png')`;
+                this.player.style.background = `${urlduck}${urlLog1}`;
                 break;
             case this.squares[this.currentIndex].classList.contains('l2', 'player'):
-                this.player.style.background = `${urlduck}url('./assets/log2.png')`;
+                this.player.style.background = `${urlduck}${urlLog2}`;
                 break;
             case this.squares[this.currentIndex].classList.contains('l3', 'player'):
-                this.player.style.background = `${urlduck}url('./assets/log3.png')`;
+                this.player.style.background = `${urlduck}${urlLog3}`;
                 break;
             case this.squares[this.currentIndex].classList.contains('lastBlock', 'player'):
                 this.player.style.background = `${urlduck}url('./assets/start.png')`;
