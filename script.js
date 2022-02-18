@@ -151,13 +151,14 @@ reStartBtn.addEventListener('click', () => {
 
 
 pauseBtn.addEventListener('click', (e) => {
-    clearInterval(timerID);
-    clearInterval(playerTimerId);
-    document.removeEventListener('keyup', player.movePlayer(e));
-    pauseBtn.innerText = 'play';
-    player.shouldMove = false;
 
-    if (pauseBtn.innerText === 'play') {
+    if (pauseBtn.innerText === 'pause') {
+        clearInterval(timerID);
+        clearInterval(playerTimerId);
+        document.removeEventListener('keyup', player.movePlayer(e));
+        pauseBtn.innerText = 'play';
+        player.shouldMove = false;
+    } else {
         pauseBtn.addEventListener('click', (e) => {
             timerID = setInterval(autoMoveObjects, 1000);
             playerTimerId = setInterval(game, 50);
@@ -166,3 +167,4 @@ pauseBtn.addEventListener('click', (e) => {
         })
     }
 })
+

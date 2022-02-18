@@ -3,16 +3,17 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: rgb(255,247,153);
+background: linear-gradient(90deg, rgba(255,247,153,1) 0%, rgba(124,197,118,1) 38%, rgba(119,197,193,1) 100%);
 }
 .grid {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid black; 
+    border: 2px solid rgb(140,103,71); 
+    box-shadow: 20px 20px 500px black;
     height: 540px;
     width: 540px;
 }
-
-
 
 .grid div {
     height: 60px;
@@ -20,13 +21,47 @@ body {
    
 }
 
+.btn-box {
+   margin: 20px;
+}
+   
+button {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 20px; 
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+
 
 .default {
     background-image: url('./assets/grass.png');
 }
 
 .lastBlock {
-    background-color: red;
+    background-image: url('assets/end.png');
 }
 
 .startBlock {

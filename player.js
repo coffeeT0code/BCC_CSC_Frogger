@@ -85,8 +85,6 @@ class Player {
                     this.urlduck = `url('./assets/duck-right.png') , `;
                     break;
             }
-            console.log(this.urlduck)
-            console.log(this.direction)
 
             this.urlLog1 = `url('./assets/log1.png')`;
             this.urlLog2 = `url('./assets/log2.png')`;
@@ -123,7 +121,7 @@ class Player {
                 this.player.style.background = `${this.urlduck}${this.urlLog3}`;
                 break;
             case this.squares[this.currentIndex].classList.contains('lastBlock', 'player'):
-                this.player.style.background = `${this.urlduck}url('./assets/start.png')`;
+                this.player.style.background = `${this.urlduck}url('./assets/end.png')`;
                 break;
 
         }
