@@ -1,9 +1,12 @@
 class Log {
     constructor() {
+
+        //creates nodelist of .log-left and .log-right
         this.logsLeft = document.querySelectorAll('.log-left');
         this.logsRight = document.querySelectorAll('.log-right');
     }
 
+    // changes the class of the logLeft elements
     moveLogLeft(logLeft) {
         
         switch (true) {
@@ -30,6 +33,7 @@ class Log {
         }
     }
 
+    // changes class of logRight elements
     moveLogRight(logRight) {
         switch (true) {
             case logRight.classList.contains('l1'):

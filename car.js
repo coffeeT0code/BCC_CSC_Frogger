@@ -1,10 +1,11 @@
 class Car {
     constructor() {
+        //creates nodelists of all .car-left .car-right elements
         this.carsLeft = document.querySelectorAll('.car-left');
         this.carsRight = document.querySelectorAll('.car-right');
     }
 
-
+    // changes classes to make it appear "moving" from right to left
     moveCarLeft(carLeft) {
         switch (true) {
             case carLeft.classList.contains('c1'):
@@ -22,6 +23,7 @@ class Car {
         }
     }
 
+    // changes classes to make it appear "moving" from left to right
     moveCarRight(carRight) {
         switch (true) {
             case carRight.classList.contains('c1'):
@@ -40,4 +42,4 @@ class Car {
     }
 }
 
-export default Car; 
+export default Car;
