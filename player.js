@@ -27,7 +27,6 @@ class Player {
 
     // function to move the player around in the game
     movePlayer(e) {
-       
         if (this.shouldMove) {
 
             // removes picture of the background

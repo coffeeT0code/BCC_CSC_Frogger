@@ -10,7 +10,6 @@ body {
 .grid {
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid rgb(140, 103, 71);
     box-shadow: 20px 20px 500px black;
     height: 540px;
     width: 540px;
@@ -36,12 +35,14 @@ h3 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+
+
 button {
-    background-color: #fbeee0;
-    border: 2px solid #422800;
+    background: linear-gradient(90deg, rgba(255, 247, 153, 0.5) 0%, rgba(124, 197, 118, 0.5) 38%, rgba(119, 197, 193, ) 100%);
+    border: none; 
     border-radius: 30px;
-    box-shadow: #422800 4px 4px 0 0;
-    color: #422800;
+    box-shadow: rgb(129, 151, 127) 4px 4px 1px 0;
+    color: rgb(59, 59, 59);
     cursor: pointer;
     display: inline-block;
     font-weight: 600;
@@ -56,13 +57,14 @@ button {
     margin: 20px;
 }
 
-.button-74:hover {
-    background-color: #fff;
+button:hover {
+    background-color: #fff
 }
 
-.button-74:active {
-    box-shadow: #422800 2px 2px 0 0;
+button:active {
     transform: translate(2px, 2px);
+    box-shadow: none; 
+    border: none;
 }
 
 .default {
@@ -122,4 +124,15 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.btn-box {
+    
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.9px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

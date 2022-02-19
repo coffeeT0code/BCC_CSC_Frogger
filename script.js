@@ -17,18 +17,22 @@ let timerID;
 let playerTimerId;
 let currentTime = 20;
 let currentIndex = 76;
-let enableRestart = true; 
+let enableRestart = true;
+let isPaused = false;
 
 let player;
 let log;
 let car;
+let grid = document.getElementById('grid');
+
 
 // instantiating the object level1 from class Level1
 let level1 = new Level1();
+grid.style.background = "url('./assets/start_bg.png')"
+
 
 // function that resets everything back to start the game again
 let resetLevel = () => {
-    let grid = document.getElementById('grid');
     // deletes all tiles
     grid.innerHTML = '';
     // resets the displays
@@ -54,12 +58,14 @@ let resetLevel = () => {
 
 // constantly checks whether loose() or win() applies. 
 function game() {
+    if(!isPaused) {
     loose();
-    win();
+    win(); }
 }
 
 // moves objects and subtracting the time with every iterations
 function autoMoveObjects() {
+    if (!isPaused) {
     // removes the background
     player.changeBackround('remove')
     currentTime--;
@@ -71,12 +77,12 @@ function autoMoveObjects() {
     car.carsLeft.forEach(carLeft => car.moveCarLeft(carLeft))
     car.carsRight.forEach(carRight => car.moveCarRight(carRight))
     movePlayerOnLogs();
-    player.changeBackround('add')
+    player.changeBackround('add') }
 
 }
 
 // makes the player "stick" to the logs (the player moves with the logs if the player stays on them)
-function movePlayerOnLogs() {
+function movePlayerOnLogs() { 
 
     // removes the background
     player.changeBackround('remove');
@@ -113,7 +119,7 @@ function loose() {
 
         // displays You lost
         displayResult.textContent = ' You lost!';
-        
+
         // clears the interval of timerID and playerTimeID
         clearInterval(timerID);
         clearInterval(playerTimerId)
@@ -123,6 +129,9 @@ function loose() {
         player.shouldMove = false;
         // the player class is removed from the current tile
         squares[player.currentIndex].classList.remove('player');
+        grid.style.background = "url('./assets/lose.png')"
+        grid.innerHTML = '';
+
     }
 }
 
@@ -136,6 +145,9 @@ function win() {
         clearInterval(playerTimerId);
         timerID = null;
         player.shouldMove = false;
+        grid.style.background = "url('./assets/win.png')"
+        grid.innerHTML = '';
+
     }
 }
 
@@ -145,6 +157,7 @@ reStartBtn.addEventListener('click', () => {
     resetLevel();
     //changes the text of the button
     pauseBtn.innerText = 'pause';
+    isPaused = false;
     // if the player is not at the start postition the player class should be removed
     if (player.currentIndex !== 76) {
         if (squares[player.currentIndex].classList.contains('player')) {
@@ -185,8 +198,6 @@ reStartBtn.addEventListener('click', () => {
         reStartBtn.innerText = 'Restart the game';
 
     } else { //if the player is at the start position
-        // enableRestart = false;
-        pauseBtn.innerText = 'pause';
 
         document.removeEventListener('keyup', (e) => {
             player.movePlayer(e);
@@ -204,28 +215,29 @@ reStartBtn.addEventListener('click', () => {
 
 pauseBtn.addEventListener('click', (e) => {
 
-    if (pauseBtn.innerText === 'pause') {
-      
-        document.removeEventListener('keyup', player.movePlayer(e));
-        pauseBtn.innerText = 'play';
-        player.shouldMove = false;
+    if (isPaused) {
 
+        // document.removeEventListener('keyup', player.movePlayer(e));
+        pauseBtn.innerText = 'pause';
+        player.shouldMove = true;
+        isPaused = false; 
         // clears the intervals
-        clearInterval(timerID);
-        clearInterval(playerTimerId);
     } else {
-        pauseBtn.addEventListener('click', (e) => {
-            // clears the intervals 
-            clearInterval(timerID);
-            clearInterval(playerTimerId);
+        isPaused = true; 
+        player.shouldMove = false; 
+        pauseBtn.innerText = 'play';
+        
+        // pauseBtn.addEventListener('click', (e) => {
+        //     // clears the intervals 
+        //     clearInterval(timerID);
+        //     clearInterval(playerTimerId);
 
-            player.shouldMove = true;
-            pauseBtn.innerText = 'pause';
-            // sets timer Invervals again
-            timerID = setInterval(autoMoveObjects, 1000);
-            playerTimerId = setInterval(game, 50);
-           
-        })
+        //     player.shouldMove = true;
+        //     pauseBtn.innerText = 'pause';
+        //     // sets timer Invervals again
+        //     timerID = setInterval(autoMoveObjects, 1000);
+        //     playerTimerId = setInterval(game, 50);
+
+        // })
     }
 })
-
