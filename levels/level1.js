@@ -1,5 +1,6 @@
 class Level1 {
     constructor() {
+        // array of strings that will define the classes
         this.level = [
 
             // row 1

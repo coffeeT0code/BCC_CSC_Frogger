@@ -110,3 +110,16 @@ button {
 .player {
     background: url('./assets/duck.png'), url('./assets/start.png');
 }
+
+.howtobox {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.9px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
