@@ -1,6 +1,5 @@
 class Player {
     constructor(currentIndex) {
-
         // creates an NodeList of all the divs inside grid
         this.squares = document.querySelectorAll('#grid div');
 
@@ -18,6 +17,9 @@ class Player {
 
         // enables to move the player after the key has been pressed
         document.addEventListener('keyup', (e) => {
+            if(e.code === 'ArrowLeft' || e.code === 'ArrowRight' || e.code === 'ArrowUp' || e.code === 'ArrowDown') {
+                e.preventDefault();
+            }
             this.movePlayer(e);
         });
 
@@ -25,6 +27,7 @@ class Player {
 
     // function to move the player around in the game
     movePlayer(e) {
+       
         if (this.shouldMove) {
 
             // removes picture of the background
