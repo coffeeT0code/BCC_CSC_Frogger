@@ -31,6 +31,9 @@ let resetLevel = () => {
     let grid = document.getElementById('grid');
     // deletes all tiles
     grid.innerHTML = '';
+    // resets the displays
+    displayResult.innerHTML = '';
+    displayRemainingTime.innerHTML = '20';
 
     // takes the strings from the level1 object and creates divs with this classes as nodeList 
     // log it with console.log(grid.childNodes)
